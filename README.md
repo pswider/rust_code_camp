@@ -39,5 +39,5 @@ Presentation Slides:
 4. The Rust Ecosystem (5 minutes) a. [Exploring the Cargo package](https://doc.rust-lang.org/book/ch14-00-more-about-cargo.html) manager and [crates.io](https://crates.io/) b. Popular Rust libraries and frameworks for beginners c. Community support and resources
 5. Building a Simple API with Rust (5 minutes) a. Introduction to the Actix-web framework b. Creating a basic API with routing and JSON handling c. Deploying your API to a server
 6. [Connecting to Microsoft Services](X:\code\rust_code_camp\rust-and-power-platform.md) (Azure, Power Platform, Azure OpenAI)
-7. Connecting to OpenAI
+7. Connecting to OpenAI (health_hub)
 8. Q&A and Closing (5 minutes) a. Answering questions from the audience b. Recap of key takeaways c. Encouragement to explore Rust further and build your own projects
