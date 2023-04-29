@@ -11,19 +11,26 @@ Presentation Slides:
 1. Introduction (5 minutes) 
    a)	Welcome and overview of the presentation 
    b)	A brief history of Rust and its growing popularity 
-   c)	Rust's goals: safety, speed, and concurrency 
+
+   1.	Origins (2006-2009): Graydon Hoare, a Mozilla employee, started Rust as a personal project to create a safe and concurrent systems programming language, inspired by languages like C++ and Haskell.
+   2.	Mozilla Sponsorship (2009): Mozilla began sponsoring the Rust project, recognizing its potential to improve web browser engine development, specifically for the Servo project.
+   3.	Rust 0.1 (2012): The first release of Rust, an alpha version, was made available to the public.
+   4.	Frequent Iterations (2012-2015): The Rust team made regular updates, refining the language based on user feedback and evolving design goals. Major changes were made to the ownership system, concurrency model, and syntax.
+   5.	Rust 1.0 (2015): The first stable release of Rust marked the language's stability and long-term commitment to backward compatibility.
+
+2. c)	Rust's goals: safety, speed, and concurrency 
 
    d)	[Who should learn Rust?](https://doc.rust-lang.org/book/ch00-00-introduction.html)
    e)	[Rust use cases with Hyperscalers (Microsoft, Google, AWS) and Edge](.\Microsoft Cloud for Healthcare - end to end mlai workload architecture.md)	
 
-2. [Rustacean community](https://rustacean-station.org/)
+3. [Rustacean community](https://rustacean-station.org/)
 
-3. Getting Started with Rust (5 minutes) 
+4. Getting Started with Rust (5 minutes) 
    a)	[Setting up your development environment](https://doc.rust-lang.org/book/ch01-01-installation.html) 
    b)	An overview of Rust's syntax and basic data types 
    c)	A simple "Hello, World!" program in Rust
 
-4. [Rust Fundamentals](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html) (10 minutes) 
+5. [Rust Fundamentals](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html) (10 minutes) 
 
    a. Variables, constants, and mutability 
 
