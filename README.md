@@ -23,7 +23,7 @@ Presentation Slides:
    d)	[Who should learn Rust?](https://doc.rust-lang.org/book/ch00-00-introduction.html)
    e)	[Rust use cases with Hyperscalers (Microsoft, Google, AWS) and Edge](.\Microsoft Cloud for Healthcare - end to end mlai workload architecture.md)	
 
-   ![.\code-camp-assets\ra_healthcare_end-to-end_workloads_with_fhir_based_phi.png](.\code-camp-assets\ra_healthcare_end-to-end_workloads_with_fhir_based_phi.png)
+   ![\code-camp-assets\ra_healthcare_end-to-end_workloads_with_fhir_based_phi.png](.\code-camp-assets\ra_healthcare_end-to-end_workloads_with_fhir_based_phi.png)
 
 3. [Rustacean community](https://rustacean-station.org/)
 
