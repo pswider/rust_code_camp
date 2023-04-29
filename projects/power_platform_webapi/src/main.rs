@@ -26,13 +26,9 @@ fn main() -> Result<(), Box<dyn Error>> {
         let client = Client::new();
 
         // Replace these values with your own
-        let tenant_id = "5f4520b5-b9f7-4e21-a41b-e0610de7f42d";
-        let client_id = "6b67080c-710e-4c34-9faf-da2de0b43304";
-        let client_secret = "MlB8Q~ZRDnGJ.fSdFTSU4envbsPDqSdspD7Q2bAF";
-        let api_url = "https://radev-11-3.crm.dynamics.com/";
 
         let auth_url = format!(
-            "https://login.microsoftonline.com/{}/oauth2/v2.0/authorize?response_type=code&client_id={}&redirect_uri=http://localhost:8080&scope=https://radev-11-3.crm.dynamics.com/.default",
+            // "https:
             tenant_id, client_id
         );
 
@@ -91,12 +87,4 @@ fn main() -> Result<(), Box<dyn Error>> {
         Ok(())
     })
 }
-/* 
-fn get_azure_app_reg(tenant_id, client_id, client_secret, api_url) -> () {
-    // Replace these values with your own
-    let tenant_id = "5f4520b5-b9f7-4e21-a41b-e0610de7f42d";
-    let client_id = "6b67080c-710e-4c34-9faf-da2de0b43304";
-    let client_secret = "MlB8Q~ZRDnGJ.fSdFTSU4envbsPDqSdspD7Q2bAF";
-    let api_url = "http://localhost:8080";
-    (tenant_id, client_id, client_secret, api_url)
-} */
+
