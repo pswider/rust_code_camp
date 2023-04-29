@@ -1,4 +1,4 @@
-# Unleashing the Power of Rust: Crafting High-Performance Code for AI-infused apps.Azure and Power Platform
+# Unleashing the Power of Rust: Secure Code for AI-infused Azure and Power Platform
 
 Session Guide and Notes
 
