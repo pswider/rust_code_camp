@@ -28,7 +28,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         // Replace these values with your own
 
         let auth_url = format!(
-            "https://login.microsoftonline.com/{}/oauth2/v2.0/authorize?response_type=code&client_id={}&redirect_uri=http://localhost:8080&scope=https://radev-11-3.crm.dynamics.com/.default",
+            // "https:
             tenant_id, client_id
         );
 
