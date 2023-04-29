@@ -1,78 +1,102 @@
-// Import reqwest crate
-use reqwest::header;
+use reqwest::Client;
+use serde::{Deserialize, Serialize};
+use std::error::Error;
+use std::thread;
+use tiny_http::{Response, Server};
 
-// Define constants for AAD parameters
-const APP_ID: &str = "your-application-id";
-const CLIENT_SECRET: &str = "your-client-secret";
-const TENANT_ID: &str = "your-tenant-id";
-const RESOURCE_ID: &str = "https://api.powerplatform.microsoft.com";
-
-// Define a struct for the access token response
-#[derive(serde::Deserialize)]
+#[derive(Serialize, Deserialize)]
 struct TokenResponse {
-access_token: String,
-expires_in: u64,
-token_type: String,
+    access_token: String,
+    token_type: String,
 }
 
-// Define a function to get an access token from AAD
-async fn get_access_token() -> Result<String, Box<dyn std::error::Error>> {
-// Construct the request URL for AAD token endpoint
-let url = format!(
-"https://login.microsoftonline.com/{}/oauth2/token",
-TENANT_ID
-);
-
-// Construct the request body with the required parameters
-let params = [
-("grant_type", "client_credentials"),
-("client_id", APP_ID),
-("client_secret", CLIENT_SECRET),
-("resource", RESOURCE_ID),
-];
-
-// Send a POST request and parse the JSON response
-let client = reqwest::Client::new();
-let response = client.post(&url).form(&params).send().await?;
-let token_response: TokenResponse = response.json().await?;
-
-// Return the access token
-Ok(token_response.access_token)
+#[derive(Serialize, Deserialize)]
+struct Lead {
+    name: String,
+    // Add other lead fields here
 }
 
-// Define a function to call the Power platform Web API
-async fn call_web_api() -> Result<(), Box<dyn std::error::Error>> {
-// Get an access token from AAD
-let access_token = get_access_token().await?;
+fn main() -> Result<(), Box<dyn Error>> {
+    let runtime = tokio::runtime::Builder::new_current_thread()
+        .enable_all()
+        .build()
+        .unwrap();
 
-// Construct the request URL for Power platform Web API endpoint
-let url = format!(
-"{}/api/data/v9.1/accounts?$select=name,revenue",
-RESOURCE_ID
-);
+    runtime.block_on(async {
+        let client = Client::new();
 
-// Construct the authorization header with the access token
-let mut headers = header::HeaderMap::new();
-headers.insert(
-header::AUTHORIZATION,
-header::HeaderValue::from_str(&format!("Bearer {}", access_token))?,
-);
+        // Replace these values with your own
+        let tenant_id = "5f4520b5-b9f7-4e21-a41b-e0610de7f42d";
+        let client_id = "6b67080c-710e-4c34-9faf-da2de0b43304";
+        let client_secret = "MlB8Q~ZRDnGJ.fSdFTSU4envbsPDqSdspD7Q2bAF";
+        let api_url = "https://radev-11-3.crm.dynamics.com/";
 
-// Send a GET request and print the JSON response
-let client = reqwest::Client::new();
-let response = client.get(&url).headers(headers).send().await?;
-let json: serde_json::Value = response.json().await?;
-println!("{}", json);
+        let auth_url = format!(
+            "https://login.microsoftonline.com/{}/oauth2/v2.0/authorize?response_type=code&client_id={}&redirect_uri=http://localhost:8080&scope=https://radev-11-3.crm.dynamics.com/.default",
+            tenant_id, client_id
+        );
 
-// Return Ok
-Ok(())
+        println!("Open this URL in your browser to authenticate:\n{}", auth_url);
+
+        let server = Server::http("localhost:8080").unwrap();
+        let request = server.recv().unwrap();
+
+        let request_url = request.url().to_string();
+
+        let response = Response::from_string("You can close this window now.");
+        request.respond(response).unwrap();
+
+        let mut code = String::new();
+        for param in request_url.split('?').nth(1).unwrap().split('&') {
+            let (key, value) = param.split_once('=').unwrap();
+            if key == "code" {
+                code = value.to_string();
+                break;
+            }
+        }
+
+        let token_url = format!(
+            "https://login.microsoftonline.com/{}/oauth2/v2.0/token",
+            tenant_id
+        );
+
+        let token_params = [
+            ("grant_type", "authorization_code"),
+            ("client_id", client_id),
+            ("client_secret", client_secret),
+            ("redirect_uri", "http://localhost:8080"),
+            ("code", &code),
+        ];
+
+        let token_response: TokenResponse = client
+            .post(&token_url)
+            .form(&token_params)
+            .send()
+            .await?
+            .json()
+            .await?;
+
+        let response = client
+            .get(format!("{}/api/data/v9.0/leads", api_url))
+            .bearer_auth(&token_response.access_token)
+            .send()
+            .await?;
+
+        let leads: Vec<Lead> = response.json().await?;
+
+        for lead in leads {
+            println!("Title: {}", lead.name);
+        }
+
+        Ok(())
+    })
 }
-
-#[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
-// Call the web API function
-call_web_api().await?;
-
-// Return Ok
-Ok(())
-}
+/* 
+fn get_azure_app_reg(tenant_id, client_id, client_secret, api_url) -> () {
+    // Replace these values with your own
+    let tenant_id = "5f4520b5-b9f7-4e21-a41b-e0610de7f42d";
+    let client_id = "6b67080c-710e-4c34-9faf-da2de0b43304";
+    let client_secret = "MlB8Q~ZRDnGJ.fSdFTSU4envbsPDqSdspD7Q2bAF";
+    let api_url = "http://localhost:8080";
+    (tenant_id, client_id, client_secret, api_url)
+} */
