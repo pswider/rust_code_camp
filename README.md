@@ -4,7 +4,7 @@
 
 If you're new to programming or just looking to expand your skills, Rust is a fantastic language to start with. In this session, we'll cover the basics of Rust programming, including its syntax and essential features. We'll also discuss why Rust is such a unique language, thanks to its memory safety and performance optimizations. By the end of this session, you'll have a solid foundation in Rust and be ready to take your first steps in creating your own API or systems-level programming. So, let's dive in and discover the exciting world of Rust programming together!
 
-Please note this repo contains assets for [Boston Code Camp 34](https://www.bostoncodecamp.com/CC34/Sessions), and [TekiGuru Rust Blog Series](https://tekkigurus.com/). This repo is not designed to learn Rust from beginning to end, but supplement an instructor lead presentation. One of the best places to get started learning Rust as a beginner is [The Rust Guide](https://doc.rust-lang.org/book/ch00-00-introduction.html).
+Please note this repo contains assets for [Boston Code Camp 34](https://www.bostoncodecamp.com/CC34/Sessions), and [TekkiGuru Rust Blog Series](https://tekkigurus.com/). This repo is not designed to learn Rust from beginning to end, but supplement an instructor lead presentation. One of the best places to get started learning Rust as a beginner is [The Rust Guide](https://doc.rust-lang.org/book/ch00-00-introduction.html).
 
 Presentation Slides:
 
